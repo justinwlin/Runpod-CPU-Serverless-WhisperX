@@ -1,0 +1,299 @@
+[
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "asyncio",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "asyncio",
+        "description": "asyncio",
+        "detail": "asyncio",
+        "documentation": {}
+    },
+    {
+        "label": "runpod",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "runpod",
+        "description": "runpod",
+        "detail": "runpod",
+        "documentation": {}
+    },
+    {
+        "label": "time",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "time",
+        "description": "time",
+        "detail": "time",
+        "documentation": {}
+    },
+    {
+        "label": "whisperx",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "whisperx",
+        "description": "whisperx",
+        "detail": "whisperx",
+        "documentation": {}
+    },
+    {
+        "label": "gc",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "gc",
+        "description": "gc",
+        "detail": "gc",
+        "documentation": {}
+    },
+    {
+        "label": "base64",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "base64",
+        "description": "base64",
+        "detail": "base64",
+        "documentation": {}
+    },
+    {
+        "label": "tempfile",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "tempfile",
+        "description": "tempfile",
+        "detail": "tempfile",
+        "documentation": {}
+    },
+    {
+        "label": "requests",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "requests",
+        "description": "requests",
+        "detail": "requests",
+        "documentation": {}
+    },
+    {
+        "label": "json",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json",
+        "description": "json",
+        "detail": "json",
+        "documentation": {}
+    },
+    {
+        "label": "sys",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sys",
+        "description": "sys",
+        "detail": "sys",
+        "documentation": {}
+    },
+    {
+        "label": "base64_to_tempfile",
+        "kind": 2,
+        "importPath": "handler",
+        "description": "handler",
+        "peekOfCode": "def base64_to_tempfile(base64_data):\n    \"\"\"\n    Decode base64 data and write it to a temporary file.\n    Returns the path to the temporary file.\n    \"\"\"\n    # Decode the base64 data to bytes\n    audio_data = base64.b64decode(base64_data)\n    # Create a temporary file and write the decoded data\n    temp_file = tempfile.NamedTemporaryFile(delete=False, suffix='.mp3')\n    with open(temp_file.name, 'wb') as file:",
+        "detail": "handler",
+        "documentation": {}
+    },
+    {
+        "label": "download_file",
+        "kind": 2,
+        "importPath": "handler",
+        "description": "handler",
+        "peekOfCode": "def download_file(url):\n    \"\"\"\n    Download a file from a URL to a temporary file and return its path.\n    \"\"\"\n    response = requests.get(url)\n    if response.status_code != 200:\n        raise Exception(\"Failed to download file from URL\")\n    temp_file = tempfile.NamedTemporaryFile(delete=False, suffix='.mp3')\n    temp_file.write(response.content)\n    temp_file.close()",
+        "detail": "handler",
+        "documentation": {}
+    },
+    {
+        "label": "adjust_concurrency",
+        "kind": 2,
+        "importPath": "handler",
+        "description": "handler",
+        "peekOfCode": "def adjust_concurrency(current_concurrency):\n    return concurrency_modifier\nif mode_to_run in [\"both\", \"serverless\"]:\n    # Assuming runpod.serverless.start is correctly implemented elsewhere\n    runpod.serverless.start({\n        \"handler\": handler,\n        \"concurrency_modifier\": adjust_concurrency,\n        \"return_aggregate_stream\": True,\n    })\nif mode_to_run == \"pod\":",
+        "detail": "handler",
+        "documentation": {}
+    },
+    {
+        "label": "model_name",
+        "kind": 5,
+        "importPath": "handler",
+        "description": "handler",
+        "peekOfCode": "model_name = os.getenv(\"MODEL\", \"mistralai/Mistral-7B-Instruct-v0.1\")\nconcurrency_modifier = int(os.getenv(\"CONCURRENCY_MODIFIER\", 1))\nmode_to_run = os.getenv(\"MODE_TO_RUN\", \"pod\")\nmodel_length_default = 25000\n# CHECK THE ENV VARIABLES FOR DEVICE AND COMPUTE TYPE\ndevice = os.environ.get('DEVICE', 'cpu') # cpu if on Mac\ncompute_type = os.environ.get('COMPUTE_TYPE', 'int8') #int8 if on Mac\nbatch_size = 16 # reduce if low on GPU mem\nlanguage_code = \"en\"\nprint(\"------- ENVIRONMENT VARIABLES -------\")",
+        "detail": "handler",
+        "documentation": {}
+    },
+    {
+        "label": "concurrency_modifier",
+        "kind": 5,
+        "importPath": "handler",
+        "description": "handler",
+        "peekOfCode": "concurrency_modifier = int(os.getenv(\"CONCURRENCY_MODIFIER\", 1))\nmode_to_run = os.getenv(\"MODE_TO_RUN\", \"pod\")\nmodel_length_default = 25000\n# CHECK THE ENV VARIABLES FOR DEVICE AND COMPUTE TYPE\ndevice = os.environ.get('DEVICE', 'cpu') # cpu if on Mac\ncompute_type = os.environ.get('COMPUTE_TYPE', 'int8') #int8 if on Mac\nbatch_size = 16 # reduce if low on GPU mem\nlanguage_code = \"en\"\nprint(\"------- ENVIRONMENT VARIABLES -------\")\nprint(\"Concurrency: \", concurrency_modifier)",
+        "detail": "handler",
+        "documentation": {}
+    },
+    {
+        "label": "mode_to_run",
+        "kind": 5,
+        "importPath": "handler",
+        "description": "handler",
+        "peekOfCode": "mode_to_run = os.getenv(\"MODE_TO_RUN\", \"pod\")\nmodel_length_default = 25000\n# CHECK THE ENV VARIABLES FOR DEVICE AND COMPUTE TYPE\ndevice = os.environ.get('DEVICE', 'cpu') # cpu if on Mac\ncompute_type = os.environ.get('COMPUTE_TYPE', 'int8') #int8 if on Mac\nbatch_size = 16 # reduce if low on GPU mem\nlanguage_code = \"en\"\nprint(\"------- ENVIRONMENT VARIABLES -------\")\nprint(\"Concurrency: \", concurrency_modifier)\nprint(\"Mode running: \", mode_to_run)",
+        "detail": "handler",
+        "documentation": {}
+    },
+    {
+        "label": "model_length_default",
+        "kind": 5,
+        "importPath": "handler",
+        "description": "handler",
+        "peekOfCode": "model_length_default = 25000\n# CHECK THE ENV VARIABLES FOR DEVICE AND COMPUTE TYPE\ndevice = os.environ.get('DEVICE', 'cpu') # cpu if on Mac\ncompute_type = os.environ.get('COMPUTE_TYPE', 'int8') #int8 if on Mac\nbatch_size = 16 # reduce if low on GPU mem\nlanguage_code = \"en\"\nprint(\"------- ENVIRONMENT VARIABLES -------\")\nprint(\"Concurrency: \", concurrency_modifier)\nprint(\"Mode running: \", mode_to_run)\nprint(\"------- -------------------- -------\")",
+        "detail": "handler",
+        "documentation": {}
+    },
+    {
+        "label": "device",
+        "kind": 5,
+        "importPath": "handler",
+        "description": "handler",
+        "peekOfCode": "device = os.environ.get('DEVICE', 'cpu') # cpu if on Mac\ncompute_type = os.environ.get('COMPUTE_TYPE', 'int8') #int8 if on Mac\nbatch_size = 16 # reduce if low on GPU mem\nlanguage_code = \"en\"\nprint(\"------- ENVIRONMENT VARIABLES -------\")\nprint(\"Concurrency: \", concurrency_modifier)\nprint(\"Mode running: \", mode_to_run)\nprint(\"------- -------------------- -------\")\ndef base64_to_tempfile(base64_data):\n    \"\"\"",
+        "detail": "handler",
+        "documentation": {}
+    },
+    {
+        "label": "compute_type",
+        "kind": 5,
+        "importPath": "handler",
+        "description": "handler",
+        "peekOfCode": "compute_type = os.environ.get('COMPUTE_TYPE', 'int8') #int8 if on Mac\nbatch_size = 16 # reduce if low on GPU mem\nlanguage_code = \"en\"\nprint(\"------- ENVIRONMENT VARIABLES -------\")\nprint(\"Concurrency: \", concurrency_modifier)\nprint(\"Mode running: \", mode_to_run)\nprint(\"------- -------------------- -------\")\ndef base64_to_tempfile(base64_data):\n    \"\"\"\n    Decode base64 data and write it to a temporary file.",
+        "detail": "handler",
+        "documentation": {}
+    },
+    {
+        "label": "batch_size",
+        "kind": 5,
+        "importPath": "handler",
+        "description": "handler",
+        "peekOfCode": "batch_size = 16 # reduce if low on GPU mem\nlanguage_code = \"en\"\nprint(\"------- ENVIRONMENT VARIABLES -------\")\nprint(\"Concurrency: \", concurrency_modifier)\nprint(\"Mode running: \", mode_to_run)\nprint(\"------- -------------------- -------\")\ndef base64_to_tempfile(base64_data):\n    \"\"\"\n    Decode base64 data and write it to a temporary file.\n    Returns the path to the temporary file.",
+        "detail": "handler",
+        "documentation": {}
+    },
+    {
+        "label": "language_code",
+        "kind": 5,
+        "importPath": "handler",
+        "description": "handler",
+        "peekOfCode": "language_code = \"en\"\nprint(\"------- ENVIRONMENT VARIABLES -------\")\nprint(\"Concurrency: \", concurrency_modifier)\nprint(\"Mode running: \", mode_to_run)\nprint(\"------- -------------------- -------\")\ndef base64_to_tempfile(base64_data):\n    \"\"\"\n    Decode base64 data and write it to a temporary file.\n    Returns the path to the temporary file.\n    \"\"\"",
+        "detail": "handler",
+        "documentation": {}
+    },
+    {
+        "label": "device",
+        "kind": 5,
+        "importPath": "preload",
+        "description": "preload",
+        "peekOfCode": "device = os.environ.get('DEVICE', 'cpu') # cpu if on Mac\ncompute_type = os.environ.get('COMPUTE_TYPE', 'int8') #int8 if on Mac\nbatch_size = 16 # reduce if low on GPU mem\nlanguage_code = \"en\"\n# 1. Transcribe with original whisper (batched)\nmodel = whisperx.load_model(\"small\", device, compute_type=compute_type, language=\"en\")\n# Load the audio\naudio = whisperx.load_audio(\"test_audio.mp3\")\n# Transcribe the audio\nresult = model.transcribe(audio, batch_size=batch_size, language=language_code, print_progress=True)",
+        "detail": "preload",
+        "documentation": {}
+    },
+    {
+        "label": "compute_type",
+        "kind": 5,
+        "importPath": "preload",
+        "description": "preload",
+        "peekOfCode": "compute_type = os.environ.get('COMPUTE_TYPE', 'int8') #int8 if on Mac\nbatch_size = 16 # reduce if low on GPU mem\nlanguage_code = \"en\"\n# 1. Transcribe with original whisper (batched)\nmodel = whisperx.load_model(\"small\", device, compute_type=compute_type, language=\"en\")\n# Load the audio\naudio = whisperx.load_audio(\"test_audio.mp3\")\n# Transcribe the audio\nresult = model.transcribe(audio, batch_size=batch_size, language=language_code, print_progress=True)\n# 2. Align whisper output",
+        "detail": "preload",
+        "documentation": {}
+    },
+    {
+        "label": "batch_size",
+        "kind": 5,
+        "importPath": "preload",
+        "description": "preload",
+        "peekOfCode": "batch_size = 16 # reduce if low on GPU mem\nlanguage_code = \"en\"\n# 1. Transcribe with original whisper (batched)\nmodel = whisperx.load_model(\"small\", device, compute_type=compute_type, language=\"en\")\n# Load the audio\naudio = whisperx.load_audio(\"test_audio.mp3\")\n# Transcribe the audio\nresult = model.transcribe(audio, batch_size=batch_size, language=language_code, print_progress=True)\n# 2. Align whisper output\nmodel_a, metadata = whisperx.load_align_model(language_code=language_code, device=device)",
+        "detail": "preload",
+        "documentation": {}
+    },
+    {
+        "label": "language_code",
+        "kind": 5,
+        "importPath": "preload",
+        "description": "preload",
+        "peekOfCode": "language_code = \"en\"\n# 1. Transcribe with original whisper (batched)\nmodel = whisperx.load_model(\"small\", device, compute_type=compute_type, language=\"en\")\n# Load the audio\naudio = whisperx.load_audio(\"test_audio.mp3\")\n# Transcribe the audio\nresult = model.transcribe(audio, batch_size=batch_size, language=language_code, print_progress=True)\n# 2. Align whisper output\nmodel_a, metadata = whisperx.load_align_model(language_code=language_code, device=device)\nresult = whisperx.align(result[\"segments\"], model_a, metadata, audio, device)",
+        "detail": "preload",
+        "documentation": {}
+    },
+    {
+        "label": "model",
+        "kind": 5,
+        "importPath": "preload",
+        "description": "preload",
+        "peekOfCode": "model = whisperx.load_model(\"small\", device, compute_type=compute_type, language=\"en\")\n# Load the audio\naudio = whisperx.load_audio(\"test_audio.mp3\")\n# Transcribe the audio\nresult = model.transcribe(audio, batch_size=batch_size, language=language_code, print_progress=True)\n# 2. Align whisper output\nmodel_a, metadata = whisperx.load_align_model(language_code=language_code, device=device)\nresult = whisperx.align(result[\"segments\"], model_a, metadata, audio, device)\nprint(result)",
+        "detail": "preload",
+        "documentation": {}
+    },
+    {
+        "label": "audio",
+        "kind": 5,
+        "importPath": "preload",
+        "description": "preload",
+        "peekOfCode": "audio = whisperx.load_audio(\"test_audio.mp3\")\n# Transcribe the audio\nresult = model.transcribe(audio, batch_size=batch_size, language=language_code, print_progress=True)\n# 2. Align whisper output\nmodel_a, metadata = whisperx.load_align_model(language_code=language_code, device=device)\nresult = whisperx.align(result[\"segments\"], model_a, metadata, audio, device)\nprint(result)",
+        "detail": "preload",
+        "documentation": {}
+    },
+    {
+        "label": "result",
+        "kind": 5,
+        "importPath": "preload",
+        "description": "preload",
+        "peekOfCode": "result = model.transcribe(audio, batch_size=batch_size, language=language_code, print_progress=True)\n# 2. Align whisper output\nmodel_a, metadata = whisperx.load_align_model(language_code=language_code, device=device)\nresult = whisperx.align(result[\"segments\"], model_a, metadata, audio, device)\nprint(result)",
+        "detail": "preload",
+        "documentation": {}
+    },
+    {
+        "label": "result",
+        "kind": 5,
+        "importPath": "preload",
+        "description": "preload",
+        "peekOfCode": "result = whisperx.align(result[\"segments\"], model_a, metadata, audio, device)\nprint(result)",
+        "detail": "preload",
+        "documentation": {}
+    },
+    {
+        "label": "submit_job_to_runpod",
+        "kind": 2,
+        "importPath": "stream_client_side",
+        "description": "stream_client_side",
+        "peekOfCode": "def submit_job_to_runpod(api_key, server_endpoint_id, prompt, answer_type=\"normal\"):\n    \"\"\"\n    Submits a job to a specific Runpod serverless endpoint.\n    Args:\n        api_key (str): Runpod API key for authentication.\n        server_endpoint_id (str): The specific endpoint ID for the serverless function on Runpod.\n        prompt (str): The text prompt for the serverless function to process.\n        answer_type (str): Specifies how the answer should be returned ('normal' or 'stream').\n    Returns:\n        dict: Direct response from the serverless function or job ID if asynchronous.",
+        "detail": "stream_client_side",
+        "documentation": {}
+    },
+    {
+        "label": "submit_job_and_stream_output",
+        "kind": 2,
+        "importPath": "stream_client_side",
+        "description": "stream_client_side",
+        "peekOfCode": "def submit_job_and_stream_output(api_key, endpoint_id, prompt):\n    \"\"\"\n    Submits a job to the specified endpoint and streams the output as it becomes available.\n    Args:\n        api_key (str): The API key for authentication.\n        endpoint_id (str): The endpoint ID for the Runpod function.\n        prompt (str): The text prompt for the serverless function to process.\n    Returns:\n        None: Directly prints streamed outputs to the console.\n    \"\"\"",
+        "detail": "stream_client_side",
+        "documentation": {}
+    },
+    {
+        "label": "check_job_status",
+        "kind": 2,
+        "importPath": "stream_client_side",
+        "description": "stream_client_side",
+        "peekOfCode": "def check_job_status(api_key, server_endpoint_id, job_id, poll=False, polling_interval=20):\n    \"\"\"\n    Checks the status of a job on Runpod.\n    Args:\n        api_key (str): Runpod API key for authentication.\n        server_endpoint_id (str): The specific endpoint ID for the serverless function on Runpod.\n        job_id (str): The job ID to check the status for.\n        poll (bool, optional): If True, continue to check the status at intervals until the job is completed. Defaults to False.\n        polling_interval (int, optional): Time in seconds to wait between status checks if polling. Defaults to 20 seconds.\n    Returns:",
+        "detail": "stream_client_side",
+        "documentation": {}
+    }
+]
