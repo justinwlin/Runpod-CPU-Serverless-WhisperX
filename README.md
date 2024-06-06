@@ -1,84 +1,19 @@
-# Runpod GPU Pod / Serverless LLM Basis
+# Runpod WhisperX Runpod CPU Serverless
 
 ## Quick Start:
 
-[Example of a repo using this template](https://github.com/justinwlin/Runpod-OpenLLM-Pod-and-Serverless/tree/main)
-
-[Docker Starter Container](https://hub.docker.com/repository/docker/justinwlin/runpod_pod_and_serverless/general)
-
-Depot Command:
+Depot Command to Build (for myself pushing to my own repo. Modify to your own needs and push to your own docker account):
 ```
 depot build -t justinwlin/whisperx_runpod_cpu:1.0 . --push --platform linux/amd64
 ```
 
 ## Summary
+This is a repository using my [base repository](https://github.com/justinwlin/Runpod-GPU-And-Serverless-Base) to deploy whisperx using runpod's cpu serverless. This is to drastically reduce transcription cost.
 
-This Docker configuration uses Runpod as a basis so that you can work with both pod and serverless. The idea is that you can work with your handler.py in a GPU / CPU Pod, validate it all works by just running the `python handler.py` file, and then when you deploy to serverless you should be getting essentially the same exact behavior.
+## Deploying to Serverless Settings
+Copy the settings provided here into a Runpod template, and then you can deploy it. For storage, you can use 20+gb whatever you feel is necessary. You get 10gb per every vcpu you allocate, so if you have 4vcpu, you can have up to 40gb of storage for your cpu serverless / pod. 
 
-## Environment Variables
-
-Below is a table of the environment variables that can be passed to the Docker container. These variables enable customization of the deployment's behavior, offering flexibility for different scenarios.
-
-| Variable               | Description                                                                                                                  | Expected Values              | Default Value                   |
-|------------------------|------------------------------------------------------------------------------------------------------------------------------|------------------------------|---------------------------------|
-| `MODE_TO_RUN`          | Determines the container's operational mode, affecting the execution of `handler.py` and the initiation of services.         | `serverless`, `pod` | pod                            |
-| `CONCURRENCY_MODIFIER` | A factor used to adjust the concurrency level for handling requests, allowing for tuning based on workload.                  | Integer                     | `1`                             |
-
-
-### Mode Descriptions
-
-- `serverless`: Executes `handler.py` for serverless request handling, optimal for scalable, efficient deployments.
-- `pod`: Initiates essential services like OpenSSH and Jupyter Lab, bypassing `handler.py`, suitable for development or tasks requiring GPU resources.
-
-## Deploying to Serverless
-
-If you want to deploy to serverless you can just follow the image. The storage can be anywhere between 20gb to 40gb depending on how much wiggle room you want for your CPU serverless when downloading and processing files. You get 10gb per VCPU, so if you have 4 VCPUs you can do up to 40gb of storage on Runpod
+This just depends on how big of files you are planning to process / store / download / concurrently transcribe.
 
 ![alt text](serverless.png)
 
-## Getting Started
-
-1. **Build the Docker Image**: Create your image using the Dockerfile, optionally specifying the `MODEL`, `CONCURRENCY_MODIFIER`, and `MAX_MODEL_LEN` variables as needed.
-
-    ```sh
-    docker build --build-arg MODEL_ARG=<your_model_identifier> --build-arg MAX_MODEL_LEN=<desired_max_length> -t your_image_name .
-    ```
-
-2. **Run the Container**: Start your container with the desired `MODE_TO_RUN`, `MAX_MODEL_LEN`, and any other environment variables.
-
-    ```sh
-    docker run -e MODE_TO_RUN=serverless -e CONCURRENCY_MODIFIER=2 -e MAX_MODEL_LEN=25000 your_image_name
-    ```
-
-    You can also just leave the Docker run **empty** and let the default run take over. And if you want to instead modify the ENV variables, just use Runpod's GUI where you can write the ENV variables there instead of in the **RUN** command if you are running on runpod. This can be helpful especially if you are for ex. debugging in GPU Pod, and then you want to just deploy on SERVERLESS by just changing the ENV variable when you are making a new template.
-
-3. **Accessing Services**: Depending on the chosen mode,
-    - In `serverless`, interact with the deployed model through the specified handler.
-    - In `pod`, access Jupyter Lab and SSH services as provided.
-
-# Developer Experience
-
-Start using the container with [GPU_POD](https://runpod.io/gsc?template=pu8uaqw765&ref=wqryvm1m
-) (This is my runpod public URL to the template all ready to go for you.)
-
-![alt text](GPU_POD.png)
-
-If you want to deploy on serverless it's super easy! Essentially copy the template but set the environment variable for the MODE to serverless. **Check to make sure the model repository names match up** as I might update template names, or you might be using a different model. Find the right one by refering to Docker which model you want to use. **MAKE SURE TO INCLUDE THE USERNAME/IMAGE:TAG** if you are missing the username, image, or tag it won't work!!:
-
-For the container size, look at the compressed docker image size on Dockerhub, and I generally like to add another 5GB to 10GB ontop of that. You can play around to see. 
-
-![alt text](SERVERLESS.png)
-
-If you end up wanting to change the handler.py I recommend to build using a flag to target the "Dockerfile_Iteration" after you build using the standard "Dockerfile" once. This way you can have the models cached during the docker build process in the base image and only update the handler.py. This way you can avoid the long wait time to "redownload the model" and just update the handler.py.
-
-```sh
-docker build -f Dockerfile_Iteration -t your_image_name .
-```
-
-## Overall Methodology:
-The methodology is:
-1. Build your first Dockerfile where we preload the model + everything the first time
-2. Launch a GPU Pod on Runpod and test the handler.py
-  -- If everything looks good, just use the same image for serverless and modify the env variable to change how it starts up
-  -- If you need to iterate, iterate on Runpod and then copy and paste the handler.py back locally and then build using the Docker_Iteration file, which means you won't have to redownload the whole model again and instead just keep iterating on handler.py
-3. Once ready, then relaunch back on GPU Pod and Serverless until ready.
