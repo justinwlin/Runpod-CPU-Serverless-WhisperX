@@ -30,6 +30,12 @@ Below is a table of the environment variables that can be passed to the Docker c
 - `serverless`: Executes `handler.py` for serverless request handling, optimal for scalable, efficient deployments.
 - `pod`: Initiates essential services like OpenSSH and Jupyter Lab, bypassing `handler.py`, suitable for development or tasks requiring GPU resources.
 
+## Deploying to Serverless
+
+If you want to deploy to serverless you can just follow the image. The storage can be anywhere between 20gb to 40gb depending on how much wiggle room you want for your CPU serverless when downloading and processing files. You get 10gb per VCPU, so if you have 4 VCPUs you can do up to 40gb of storage on Runpod
+
+![alt text](serverless.png)
+
 ## Getting Started
 
 1. **Build the Docker Image**: Create your image using the Dockerfile, optionally specifying the `MODEL`, `CONCURRENCY_MODIFIER`, and `MAX_MODEL_LEN` variables as needed.
@@ -49,6 +55,7 @@ Below is a table of the environment variables that can be passed to the Docker c
 3. **Accessing Services**: Depending on the chosen mode,
     - In `serverless` and `both`, interact with the deployed model through the specified handler.
     - In `pod` and `both`, access Jupyter Lab and SSH services as provided.
+
 
 ### Using Depot
 
@@ -87,7 +94,6 @@ For the container size, look at the compressed docker image size on Dockerhub, a
 ![alt text](SERVERLESS.png)
 
 If you end up wanting to change the handler.py I recommend to build using a flag to target the "Dockerfile_Iteration" after you build using the standard "Dockerfile" once. This way you can have the models cached during the docker build process in the base image and only update the handler.py. This way you can avoid the long wait time to "redownload the model" and just update the handler.py.
-
 
 ```sh
 docker build -f Dockerfile_Iteration -t your_image_name .
