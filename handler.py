@@ -25,6 +25,26 @@ print("Concurrency: ", concurrency_modifier)
 print("Mode running: ", mode_to_run)
 print("------- -------------------- -------")
 
+# Grab the model
+model = whisperx.load_model("small", device, compute_type=compute_type, language="en")
+
+def mp3_to_base64(file_path):
+    """
+    Convert an MP3 file to a Base64-encoded string.
+
+    Args:
+        file_path (str): The path to the MP3 file.
+
+    Returns:
+        str: The Base64-encoded string of the MP3 file.
+    """
+    # Read the file in binary mode
+    with open(file_path, 'rb') as file:
+        audio_data = file.read()
+
+    # Encode the binary data to Base64
+    return base64.b64encode(audio_data).decode('utf-8')
+    
 def base64_to_tempfile(base64_data):
     """
     Decode base64 data and write it to a temporary file.
@@ -82,8 +102,6 @@ async def handler(event):
         return "No audio input provided"
 
     try:
-        # 1. Transcribe with original whisper (batched)
-        model = whisperx.load_model("small", device, compute_type=compute_type, language="en")
         # Load the audio
         audio = whisperx.load_audio(audio_input)
         # Transcribe the audio
@@ -115,7 +133,7 @@ if mode_to_run in ["both", "serverless"]:
 if mode_to_run == "pod":
     async def main():
         prompt = "What is the capital of France?"
-        requestObject = {"input": {"prompt": prompt}}
+        requestObject = {"input": {"audio_base_64": mp3_to_base64("test_audio.mp3")}}
         
         response = await handler(requestObject)
         print(response)
