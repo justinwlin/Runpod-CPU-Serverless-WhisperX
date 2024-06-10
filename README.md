@@ -1,5 +1,12 @@
 # Runpod WhisperX Runpod CPU Serverless
 
+## Runpod Link:
+https://runpod.io/console/deploy?template=x4kgjibge6&ref=wqryvm1m
+
+To set to serverless, just change the environment variable to MODE_TO_RUN to serverless
+
+The pod settings are great for yourself to test things out though, and has an example audio file in there.
+
 ## Quick Start:
 
 Depot Command to Build (for myself pushing to my own repo. Modify to your own needs and push to your own docker account):
@@ -17,3 +24,10 @@ This just depends on how big of files you are planning to process / store / down
 
 ![alt text](serverless.png)
 
+## Input:
+
+`audio_base_64`: a base64 of your audio string
+or
+`audio_url`: a URL that the pod will try to download from. 
+
+The reason why a URL is good is in case your audio file exceeds the 10mb limit for a Runpod request.
