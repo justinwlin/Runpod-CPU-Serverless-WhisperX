@@ -3,7 +3,7 @@ import os
 
 device = os.environ.get('DEVICE', 'cpu') # cpu if on Mac
 compute_type = os.environ.get('COMPUTE_TYPE', 'int8') #int8 if on Mac
-batch_size = 16 # reduce if low on GPU mem
+batch_size = 8 # reduce if low on GPU mem
 language_code = "en"
 
 # 1. Transcribe with original whisper (batched)

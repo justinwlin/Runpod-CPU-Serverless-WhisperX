@@ -220,7 +220,7 @@
         "kind": 5,
         "importPath": "preload",
         "description": "preload",
-        "peekOfCode": "device = os.environ.get('DEVICE', 'cpu') # cpu if on Mac\ncompute_type = os.environ.get('COMPUTE_TYPE', 'int8') #int8 if on Mac\nbatch_size = 16 # reduce if low on GPU mem\nlanguage_code = \"en\"\n# 1. Transcribe with original whisper (batched)\nmodel = whisperx.load_model(\"small\", device, compute_type=compute_type, language=\"en\")\n# Load the audio\naudio = whisperx.load_audio(\"test_audio.mp3\")\n# Transcribe the audio\nresult = model.transcribe(audio, batch_size=batch_size, language=language_code, print_progress=True)",
+        "peekOfCode": "device = os.environ.get('DEVICE', 'cpu') # cpu if on Mac\ncompute_type = os.environ.get('COMPUTE_TYPE', 'int8') #int8 if on Mac\nbatch_size = 8 # reduce if low on GPU mem\nlanguage_code = \"en\"\n# 1. Transcribe with original whisper (batched)\nmodel = whisperx.load_model(\"small\", device, compute_type=compute_type, language=\"en\")\n# Load the audio\naudio = whisperx.load_audio(\"test_audio.mp3\")\n# Transcribe the audio\nresult = model.transcribe(audio, batch_size=batch_size, language=language_code, print_progress=True)",
         "detail": "preload",
         "documentation": {}
     },
@@ -229,7 +229,7 @@
         "kind": 5,
         "importPath": "preload",
         "description": "preload",
-        "peekOfCode": "compute_type = os.environ.get('COMPUTE_TYPE', 'int8') #int8 if on Mac\nbatch_size = 16 # reduce if low on GPU mem\nlanguage_code = \"en\"\n# 1. Transcribe with original whisper (batched)\nmodel = whisperx.load_model(\"small\", device, compute_type=compute_type, language=\"en\")\n# Load the audio\naudio = whisperx.load_audio(\"test_audio.mp3\")\n# Transcribe the audio\nresult = model.transcribe(audio, batch_size=batch_size, language=language_code, print_progress=True)\n# 2. Align whisper output",
+        "peekOfCode": "compute_type = os.environ.get('COMPUTE_TYPE', 'int8') #int8 if on Mac\nbatch_size = 8 # reduce if low on GPU mem\nlanguage_code = \"en\"\n# 1. Transcribe with original whisper (batched)\nmodel = whisperx.load_model(\"small\", device, compute_type=compute_type, language=\"en\")\n# Load the audio\naudio = whisperx.load_audio(\"test_audio.mp3\")\n# Transcribe the audio\nresult = model.transcribe(audio, batch_size=batch_size, language=language_code, print_progress=True)\n# 2. Align whisper output",
         "detail": "preload",
         "documentation": {}
     },
@@ -238,7 +238,7 @@
         "kind": 5,
         "importPath": "preload",
         "description": "preload",
-        "peekOfCode": "batch_size = 16 # reduce if low on GPU mem\nlanguage_code = \"en\"\n# 1. Transcribe with original whisper (batched)\nmodel = whisperx.load_model(\"small\", device, compute_type=compute_type, language=\"en\")\n# Load the audio\naudio = whisperx.load_audio(\"test_audio.mp3\")\n# Transcribe the audio\nresult = model.transcribe(audio, batch_size=batch_size, language=language_code, print_progress=True)\n# 2. Align whisper output\nmodel_a, metadata = whisperx.load_align_model(language_code=language_code, device=device)",
+        "peekOfCode": "batch_size = 8 # reduce if low on GPU mem\nlanguage_code = \"en\"\n# 1. Transcribe with original whisper (batched)\nmodel = whisperx.load_model(\"small\", device, compute_type=compute_type, language=\"en\")\n# Load the audio\naudio = whisperx.load_audio(\"test_audio.mp3\")\n# Transcribe the audio\nresult = model.transcribe(audio, batch_size=batch_size, language=language_code, print_progress=True)\n# 2. Align whisper output\nmodel_a, metadata = whisperx.load_align_model(language_code=language_code, device=device)",
         "detail": "preload",
         "documentation": {}
     },

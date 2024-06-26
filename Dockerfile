@@ -39,6 +39,8 @@ RUN pip install --no-cache-dir \
     OhMyRunPod \
     asyncio \
     requests \
+    yt-dlp \
+    numpy==1.26.4 \
     runpod==1.6.2
 
 # Install requirements.txt
