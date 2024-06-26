@@ -99,6 +99,15 @@
         "documentation": {}
     },
     {
+        "label": "mp3_to_base64",
+        "kind": 2,
+        "importPath": "handler",
+        "description": "handler",
+        "peekOfCode": "def mp3_to_base64(file_path):\n    \"\"\"\n    Convert an MP3 file to a Base64-encoded string.\n    Args:\n        file_path (str): The path to the MP3 file.\n    Returns:\n        str: The Base64-encoded string of the MP3 file.\n    \"\"\"\n    # Read the file in binary mode\n    with open(file_path, 'rb') as file:",
+        "detail": "handler",
+        "documentation": {}
+    },
+    {
         "label": "base64_to_tempfile",
         "kind": 2,
         "importPath": "handler",
@@ -130,7 +139,7 @@
         "kind": 5,
         "importPath": "handler",
         "description": "handler",
-        "peekOfCode": "model_name = os.getenv(\"MODEL\", \"mistralai/Mistral-7B-Instruct-v0.1\")\nconcurrency_modifier = int(os.getenv(\"CONCURRENCY_MODIFIER\", 1))\nmode_to_run = os.getenv(\"MODE_TO_RUN\", \"pod\")\nmodel_length_default = 25000\n# CHECK THE ENV VARIABLES FOR DEVICE AND COMPUTE TYPE\ndevice = os.environ.get('DEVICE', 'cpu') # cpu if on Mac\ncompute_type = os.environ.get('COMPUTE_TYPE', 'int8') #int8 if on Mac\nbatch_size = 16 # reduce if low on GPU mem\nlanguage_code = \"en\"\nprint(\"------- ENVIRONMENT VARIABLES -------\")",
+        "peekOfCode": "model_name = os.getenv(\"MODEL\", \"mistralai/Mistral-7B-Instruct-v0.1\")\nconcurrency_modifier = int(os.getenv(\"CONCURRENCY_MODIFIER\", 1))\nmode_to_run = os.getenv(\"MODE_TO_RUN\", \"pod\")\nmodel_length_default = 25000\n# CHECK THE ENV VARIABLES FOR DEVICE AND COMPUTE TYPE\ndevice = os.environ.get('DEVICE', 'cpu') # cpu if on Mac\ncompute_type = os.environ.get('COMPUTE_TYPE', 'int8') #int8 if on Mac\nbatch_size = 8 # reduce if low on GPU mem\nlanguage_code = \"en\"\nprint(\"------- ENVIRONMENT VARIABLES -------\")",
         "detail": "handler",
         "documentation": {}
     },
@@ -139,7 +148,7 @@
         "kind": 5,
         "importPath": "handler",
         "description": "handler",
-        "peekOfCode": "concurrency_modifier = int(os.getenv(\"CONCURRENCY_MODIFIER\", 1))\nmode_to_run = os.getenv(\"MODE_TO_RUN\", \"pod\")\nmodel_length_default = 25000\n# CHECK THE ENV VARIABLES FOR DEVICE AND COMPUTE TYPE\ndevice = os.environ.get('DEVICE', 'cpu') # cpu if on Mac\ncompute_type = os.environ.get('COMPUTE_TYPE', 'int8') #int8 if on Mac\nbatch_size = 16 # reduce if low on GPU mem\nlanguage_code = \"en\"\nprint(\"------- ENVIRONMENT VARIABLES -------\")\nprint(\"Concurrency: \", concurrency_modifier)",
+        "peekOfCode": "concurrency_modifier = int(os.getenv(\"CONCURRENCY_MODIFIER\", 1))\nmode_to_run = os.getenv(\"MODE_TO_RUN\", \"pod\")\nmodel_length_default = 25000\n# CHECK THE ENV VARIABLES FOR DEVICE AND COMPUTE TYPE\ndevice = os.environ.get('DEVICE', 'cpu') # cpu if on Mac\ncompute_type = os.environ.get('COMPUTE_TYPE', 'int8') #int8 if on Mac\nbatch_size = 8 # reduce if low on GPU mem\nlanguage_code = \"en\"\nprint(\"------- ENVIRONMENT VARIABLES -------\")\nprint(\"Concurrency: \", concurrency_modifier)",
         "detail": "handler",
         "documentation": {}
     },
@@ -148,7 +157,7 @@
         "kind": 5,
         "importPath": "handler",
         "description": "handler",
-        "peekOfCode": "mode_to_run = os.getenv(\"MODE_TO_RUN\", \"pod\")\nmodel_length_default = 25000\n# CHECK THE ENV VARIABLES FOR DEVICE AND COMPUTE TYPE\ndevice = os.environ.get('DEVICE', 'cpu') # cpu if on Mac\ncompute_type = os.environ.get('COMPUTE_TYPE', 'int8') #int8 if on Mac\nbatch_size = 16 # reduce if low on GPU mem\nlanguage_code = \"en\"\nprint(\"------- ENVIRONMENT VARIABLES -------\")\nprint(\"Concurrency: \", concurrency_modifier)\nprint(\"Mode running: \", mode_to_run)",
+        "peekOfCode": "mode_to_run = os.getenv(\"MODE_TO_RUN\", \"pod\")\nmodel_length_default = 25000\n# CHECK THE ENV VARIABLES FOR DEVICE AND COMPUTE TYPE\ndevice = os.environ.get('DEVICE', 'cpu') # cpu if on Mac\ncompute_type = os.environ.get('COMPUTE_TYPE', 'int8') #int8 if on Mac\nbatch_size = 8 # reduce if low on GPU mem\nlanguage_code = \"en\"\nprint(\"------- ENVIRONMENT VARIABLES -------\")\nprint(\"Concurrency: \", concurrency_modifier)\nprint(\"Mode running: \", mode_to_run)",
         "detail": "handler",
         "documentation": {}
     },
@@ -157,7 +166,7 @@
         "kind": 5,
         "importPath": "handler",
         "description": "handler",
-        "peekOfCode": "model_length_default = 25000\n# CHECK THE ENV VARIABLES FOR DEVICE AND COMPUTE TYPE\ndevice = os.environ.get('DEVICE', 'cpu') # cpu if on Mac\ncompute_type = os.environ.get('COMPUTE_TYPE', 'int8') #int8 if on Mac\nbatch_size = 16 # reduce if low on GPU mem\nlanguage_code = \"en\"\nprint(\"------- ENVIRONMENT VARIABLES -------\")\nprint(\"Concurrency: \", concurrency_modifier)\nprint(\"Mode running: \", mode_to_run)\nprint(\"------- -------------------- -------\")",
+        "peekOfCode": "model_length_default = 25000\n# CHECK THE ENV VARIABLES FOR DEVICE AND COMPUTE TYPE\ndevice = os.environ.get('DEVICE', 'cpu') # cpu if on Mac\ncompute_type = os.environ.get('COMPUTE_TYPE', 'int8') #int8 if on Mac\nbatch_size = 8 # reduce if low on GPU mem\nlanguage_code = \"en\"\nprint(\"------- ENVIRONMENT VARIABLES -------\")\nprint(\"Concurrency: \", concurrency_modifier)\nprint(\"Mode running: \", mode_to_run)\nprint(\"------- -------------------- -------\")",
         "detail": "handler",
         "documentation": {}
     },
@@ -166,7 +175,7 @@
         "kind": 5,
         "importPath": "handler",
         "description": "handler",
-        "peekOfCode": "device = os.environ.get('DEVICE', 'cpu') # cpu if on Mac\ncompute_type = os.environ.get('COMPUTE_TYPE', 'int8') #int8 if on Mac\nbatch_size = 16 # reduce if low on GPU mem\nlanguage_code = \"en\"\nprint(\"------- ENVIRONMENT VARIABLES -------\")\nprint(\"Concurrency: \", concurrency_modifier)\nprint(\"Mode running: \", mode_to_run)\nprint(\"------- -------------------- -------\")\ndef base64_to_tempfile(base64_data):\n    \"\"\"",
+        "peekOfCode": "device = os.environ.get('DEVICE', 'cpu') # cpu if on Mac\ncompute_type = os.environ.get('COMPUTE_TYPE', 'int8') #int8 if on Mac\nbatch_size = 8 # reduce if low on GPU mem\nlanguage_code = \"en\"\nprint(\"------- ENVIRONMENT VARIABLES -------\")\nprint(\"Concurrency: \", concurrency_modifier)\nprint(\"Mode running: \", mode_to_run)\nprint(\"------- -------------------- -------\")\n# Grab the model\nmodel = whisperx.load_model(\"small\", device, compute_type=compute_type, language=\"en\")",
         "detail": "handler",
         "documentation": {}
     },
@@ -175,7 +184,7 @@
         "kind": 5,
         "importPath": "handler",
         "description": "handler",
-        "peekOfCode": "compute_type = os.environ.get('COMPUTE_TYPE', 'int8') #int8 if on Mac\nbatch_size = 16 # reduce if low on GPU mem\nlanguage_code = \"en\"\nprint(\"------- ENVIRONMENT VARIABLES -------\")\nprint(\"Concurrency: \", concurrency_modifier)\nprint(\"Mode running: \", mode_to_run)\nprint(\"------- -------------------- -------\")\ndef base64_to_tempfile(base64_data):\n    \"\"\"\n    Decode base64 data and write it to a temporary file.",
+        "peekOfCode": "compute_type = os.environ.get('COMPUTE_TYPE', 'int8') #int8 if on Mac\nbatch_size = 8 # reduce if low on GPU mem\nlanguage_code = \"en\"\nprint(\"------- ENVIRONMENT VARIABLES -------\")\nprint(\"Concurrency: \", concurrency_modifier)\nprint(\"Mode running: \", mode_to_run)\nprint(\"------- -------------------- -------\")\n# Grab the model\nmodel = whisperx.load_model(\"small\", device, compute_type=compute_type, language=\"en\")\ndef mp3_to_base64(file_path):",
         "detail": "handler",
         "documentation": {}
     },
@@ -184,7 +193,7 @@
         "kind": 5,
         "importPath": "handler",
         "description": "handler",
-        "peekOfCode": "batch_size = 16 # reduce if low on GPU mem\nlanguage_code = \"en\"\nprint(\"------- ENVIRONMENT VARIABLES -------\")\nprint(\"Concurrency: \", concurrency_modifier)\nprint(\"Mode running: \", mode_to_run)\nprint(\"------- -------------------- -------\")\ndef base64_to_tempfile(base64_data):\n    \"\"\"\n    Decode base64 data and write it to a temporary file.\n    Returns the path to the temporary file.",
+        "peekOfCode": "batch_size = 8 # reduce if low on GPU mem\nlanguage_code = \"en\"\nprint(\"------- ENVIRONMENT VARIABLES -------\")\nprint(\"Concurrency: \", concurrency_modifier)\nprint(\"Mode running: \", mode_to_run)\nprint(\"------- -------------------- -------\")\n# Grab the model\nmodel = whisperx.load_model(\"small\", device, compute_type=compute_type, language=\"en\")\ndef mp3_to_base64(file_path):\n    \"\"\"",
         "detail": "handler",
         "documentation": {}
     },
@@ -193,7 +202,16 @@
         "kind": 5,
         "importPath": "handler",
         "description": "handler",
-        "peekOfCode": "language_code = \"en\"\nprint(\"------- ENVIRONMENT VARIABLES -------\")\nprint(\"Concurrency: \", concurrency_modifier)\nprint(\"Mode running: \", mode_to_run)\nprint(\"------- -------------------- -------\")\ndef base64_to_tempfile(base64_data):\n    \"\"\"\n    Decode base64 data and write it to a temporary file.\n    Returns the path to the temporary file.\n    \"\"\"",
+        "peekOfCode": "language_code = \"en\"\nprint(\"------- ENVIRONMENT VARIABLES -------\")\nprint(\"Concurrency: \", concurrency_modifier)\nprint(\"Mode running: \", mode_to_run)\nprint(\"------- -------------------- -------\")\n# Grab the model\nmodel = whisperx.load_model(\"small\", device, compute_type=compute_type, language=\"en\")\ndef mp3_to_base64(file_path):\n    \"\"\"\n    Convert an MP3 file to a Base64-encoded string.",
+        "detail": "handler",
+        "documentation": {}
+    },
+    {
+        "label": "model",
+        "kind": 5,
+        "importPath": "handler",
+        "description": "handler",
+        "peekOfCode": "model = whisperx.load_model(\"small\", device, compute_type=compute_type, language=\"en\")\ndef mp3_to_base64(file_path):\n    \"\"\"\n    Convert an MP3 file to a Base64-encoded string.\n    Args:\n        file_path (str): The path to the MP3 file.\n    Returns:\n        str: The Base64-encoded string of the MP3 file.\n    \"\"\"\n    # Read the file in binary mode",
         "detail": "handler",
         "documentation": {}
     },

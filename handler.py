@@ -17,7 +17,7 @@ model_length_default = 25000
 # CHECK THE ENV VARIABLES FOR DEVICE AND COMPUTE TYPE
 device = os.environ.get('DEVICE', 'cpu') # cpu if on Mac
 compute_type = os.environ.get('COMPUTE_TYPE', 'int8') #int8 if on Mac
-batch_size = 16 # reduce if low on GPU mem
+batch_size = 8 # reduce if low on GPU mem
 language_code = "en"
 
 print("------- ENVIRONMENT VARIABLES -------")
